@@ -1,12 +1,31 @@
-import Intro from "./components/Intro";
+import Header from "./components/Header";
+import './App.css'
+import { useState } from "react";
 
 function App() {
-  let title = "Welcome to my website"
+
+  const [num, setNum] = useState(1)
+
+  
+  const incre = () =>{
+    setNum(num + 1)
+  }
+
+  const decre = () =>{
+    setNum(num - 1)
+  }
+
   return (
-    <>
-      <h1>{title}</h1>
-      <Intro name="Piyush Gupta" age="19" pro="Programmer" />
-    </>
+    <div className="App">
+      <Header />
+      <div className="main">
+        <h2 className="heading">{num}</h2>
+        <div className="buttons">
+          <button className="btn" onClick={incre}>increment</button>
+          <button className="btn" onClick={decre}>decrement</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
