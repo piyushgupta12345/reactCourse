@@ -1,29 +1,22 @@
-import Header from "./components/Header";
-import About from "./components/About";
-import Contact from "./components/Contact";
+import './App.css';
+import Header from './components/Header';
+import ComA from './components/ComA';
+import { useState, createContext } from 'react';
 
-import './App.css'
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+const AppState = createContext();
 
 function App() {
 
-  return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Routes>
-          {/* About Routes */}
-          <Route path="/about" element={<About />}>
-          </Route>
+    const [data, setData] = useState("Piyush");
+    const [name, setName] = useState({name:"Pgl",age:21});
 
-          {/* Contact Routes */}
-          <Route path="/contact" element={<Contact />}>
-          </Route>
-
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <AppState.Provider value={{data,name}}> 
+            <Header />
+            <ComA />
+        </AppState.Provider>
+    )
 }
 
 export default App;
+export {AppState};
