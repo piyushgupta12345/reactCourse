@@ -1,22 +1,34 @@
 import './App.css';
 import Header from './components/Header';
-import ComA from './components/ComA';
-import { useState, createContext } from 'react';
+import { useReducer } from 'react';
 
-const AppState = createContext();
+const reducer = (state, action) => {
+    /*console.log("state: ", state);
+    console.log("action: ", action);
+    return state;*/
+    if (action.type === 'Inc') {
+        return state + 3;
+    } else if(action.type === 'Dec') {
+        return state - 3;
+    } else if(action.type === 'Mul') {
+        return state * 3;
+    }  
+    return state;
+}
 
 function App() {
 
-    const [data, setData] = useState("Piyush");
-    const [name, setName] = useState({name:"Pgl",age:21});
+    const[state, dispatch] = useReducer(reducer, 0);
 
     return (
-        <AppState.Provider value={{data,name}}> 
+        <>
             <Header />
-            <ComA />
-        </AppState.Provider>
+            <h3>{state}</h3>
+            <button onClick={()=> dispatch({type:"Inc"})}>Increment</button>
+            <button onClick={()=> dispatch({type:"Dec"})}>decrement</button>
+            <button onClick={()=> dispatch({type:"Mul"})}>multiply</button>
+        </>
     )
 }
 
 export default App;
-export {AppState};
